@@ -572,6 +572,26 @@ LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_NBWait(seL4_CPtr src, seL4_Word *sen
 #endif
 
 #ifdef CONFIG_PRINTING
+LIBSEL4_INLINE_FUNC seL4MessageInfo_t seL4_DebugScanf()
+#endif
+{
+
+    seL4_MessageInfo_t info;
+    seL4_Word badge;
+    seL4_Word msg0 = 0;
+    seL4_Word msg1 = 0;
+    seL4_Word msg2 = 0;
+    seL4_Word msg3 = 0;
+
+    arm_sys_recv(seL4_SysDebugScanf, src, &badge, &info.words[0], &msg0, &msg1, &msg2, &msg3, LIBSEL4_MCS_REPLY);
+    if(sender) {
+        *sender = badge;
+    }
+    return info;
+}
+
+
+#ifdef CONFIG_PRINTING
 LIBSEL4_INLINE_FUNC void seL4_DebugPutChar(char c)
 {
     seL4_Word unused0 = 0;

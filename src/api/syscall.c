@@ -70,6 +70,10 @@ exception_t handleInterruptEntry(void)
 exception_t handleUnknownSyscall(word_t w)
 {
 #ifdef CONFIG_PRINTING
+    if (w == SysDebugScanf) {
+        kernel_getDebugChar();
+        return EXCEPTION_NONE;
+    }
     if (w == SysDebugPutChar) {
         kernel_putchar(getRegister(NODE_STATE(ksCurThread), capRegister));
         return EXCEPTION_NONE;
