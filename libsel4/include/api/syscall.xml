@@ -39,6 +39,7 @@
     <debug>
         <config>
             <condition><config var="CONFIG_PRINTING"/></condition>
+            <syscall name="DebugScanf"  />
             <syscall name="DebugPutChar"  />
             <syscall name="DebugDumpScheduler" />
         </config>
