@@ -573,7 +573,6 @@ LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_NBWait(seL4_CPtr src, seL4_Word *sen
 
 #ifdef CONFIG_PRINTING
 LIBSEL4_INLINE_FUNC seL4MessageInfo_t seL4_DebugScanf()
-#endif
 {
 
     seL4_MessageInfo_t info;
@@ -591,7 +590,6 @@ LIBSEL4_INLINE_FUNC seL4MessageInfo_t seL4_DebugScanf()
 }
 
 
-#ifdef CONFIG_PRINTING
 LIBSEL4_INLINE_FUNC void seL4_DebugPutChar(char c)
 {
     seL4_Word unused0 = 0;
