@@ -43,6 +43,9 @@
 LIBSEL4_INLINE_FUNC void
 seL4_DebugPutChar(char c);
 
+LIBSEL4_INLINE_FUNC seL4_Word seL4_DebugScanf();
+
+
 /**
  * @xmlonly <manual name="Dump scheduler" label="sel4_dumpscheduler"/> @endxmlonly
  * @brief Output the contents of the kernel scheduler.

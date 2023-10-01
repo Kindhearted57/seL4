@@ -13,9 +13,7 @@ void kernel_putDebugChar(unsigned char c)
 {
     uart_console_putchar(c);
 }
-#endif /* CONFIG_PRINTING */
 
-#ifdef CONFIG_DEBUG_BUILD
 unsigned char kernel_getDebugChar(void)
 {
     return uart_drv_getchar();

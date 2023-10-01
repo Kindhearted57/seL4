@@ -573,7 +573,7 @@ LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_NBWait(seL4_CPtr src, seL4_Word *sen
 
 #ifdef CONFIG_PRINTING
 
-LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_DebugScanf(seL4_CPtr src)
+LIBSEL4_INLINE_FUNC seL4_Word seL4_DebugScanf()
 {
 
     seL4_MessageInfo_t info;
@@ -582,10 +582,15 @@ LIBSEL4_INLINE_FUNC seL4_MessageInfo_t seL4_DebugScanf(seL4_CPtr src)
     seL4_Word msg1 = 0;
     seL4_Word msg2 = 0;
     seL4_Word msg3 = 0;
+    seL4_Word src = 0;
+    arm_sys_recv(seL4_SysDebugScanf, &src, &badge, &info.words[0], &msg0, &msg1, &msg2, &msg3, LIBSEL4_MCS_REPLY);
 
-    arm_sys_recv(seL4_SysDebugScanf, src, &badge, &info.words[0], &msg0, &msg1, &msg2, &msg3, LIBSEL4_MCS_REPLY);
+    seL4_SetMR(0, msg0);
+    seL4_SetMR(1, msg1);
+    seL4_SetMR(2, msg2);
+    seL4_SetMR(3, msg3);
 
-    return info;
+    return info.words[0];
 }
 
 LIBSEL4_INLINE_FUNC void seL4_DebugPutChar(char c)

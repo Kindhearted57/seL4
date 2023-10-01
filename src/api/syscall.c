@@ -71,11 +71,17 @@ exception_t handleUnknownSyscall(word_t w)
 {
 #ifdef CONFIG_PRINTING
     if (w == SysDebugScanf) {
-        kernel_getDebugChar();
+        char DebugChar = kernel_getDebugChar();
+
+        setRegister(NODE_STATE(ksCurThread), msgInfoRegister, DebugChar);
+        // pass DebugChar to register
+
         return EXCEPTION_NONE;
-    }
+    } 
+    
     if (w == SysDebugPutChar) {
         kernel_putchar(getRegister(NODE_STATE(ksCurThread), capRegister));
+        
         return EXCEPTION_NONE;
     }
     if (w == SysDebugDumpScheduler) {
